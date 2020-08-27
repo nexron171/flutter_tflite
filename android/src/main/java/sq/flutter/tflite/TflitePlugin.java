@@ -221,14 +221,14 @@ public class TflitePlugin implements MethodCallHandler {
     }
 
     int numThreads = (int) args.get("numThreads");
-//     boolean useGpuDelegate = (boolean) args.get("useGpuDelegate") ?: false;
+    boolean useGpuDelegate = (boolean) args.get("useGpuDelegate");
 
     final Interpreter.Options tfliteOptions = new Interpreter.Options();
     tfliteOptions.setNumThreads(numThreads);
-//     if (useGpuDelegate){
-//       GpuDelegate delegate = new GpuDelegate();
-//       tfliteOptions.addDelegate(delegate);
-//     }
+    if (null != useGpuDelegate && useGpuDelegate){
+      GpuDelegate delegate = new GpuDelegate();
+      tfliteOptions.addDelegate(delegate);
+    }
     tfLite = new Interpreter(buffer, tfliteOptions);
 
     String labels = args.get("labels").toString();
