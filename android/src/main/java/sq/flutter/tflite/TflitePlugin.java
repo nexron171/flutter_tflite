@@ -225,7 +225,7 @@ public class TflitePlugin implements MethodCallHandler {
 
     final Interpreter.Options tfliteOptions = new Interpreter.Options();
     tfliteOptions.setNumThreads(numThreads);
-    if (null != useGpuDelegate && useGpuDelegate){
+    if (useGpuDelegate){
       GpuDelegate delegate = new GpuDelegate();
       tfliteOptions.addDelegate(delegate);
     }
